@@ -1,48 +1,78 @@
 
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <header class="site-header">
+    <RouterLink class="brand" to="/">Sinat Portfolio</RouterLink>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
+    <nav class="nav-links" aria-label="Main navigation">
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/about">About</RouterLink>
+      <RouterLink to="/projects">Projects</RouterLink>
+    </nav>
   </header>
 
-  <main>
-    <TheWelcome />
+  <main class="page-shell">
+    <RouterView />
   </main>
 </template>
 
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid #dddddd;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.brand {
+  color: #222222;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.nav-links a {
+  border: 1px solid #cccccc;
+  color: #333333;
+  padding: 0.45rem 0.75rem;
+  text-decoration: none;
+}
+
+.nav-links a:hover,
+.nav-links a.router-link-active {
+  background: #333333;
+  color: #ffffff;
+}
+
+.page-shell {
+  min-height: calc(100vh - 7rem);
+}
+
+@media (max-width: 640px) {
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
+  .nav-links {
+    width: 100%;
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+  .nav-links a {
+    flex: 1;
+    text-align: center;
   }
 }
 </style>
